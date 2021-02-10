@@ -1,0 +1,18 @@
+{
+  "name": "game-grouper",
+  "version": "1.0.0",
+  "description": "discord bot for game grouping",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node node_modules\nodemon\bin\nodemon.js index.js"
+  },
+  "author": "Matthieu Caron",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^12.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}
