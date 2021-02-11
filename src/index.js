@@ -62,8 +62,32 @@ client.on('message', async function (message) {
     roles.forEach((role) => {
       eventEmbed.addField(role, "Pas encore d'inscrits");
     });
-    message.reply(eventEmbed);
+    const eventMessage = await message.reply(eventEmbed);
+
+    // Handle signing up through the reactions
+    const responseCollector = eventMessage.createReactionCollector((reaction) =>
+      ['1️⃣', '2️⃣', '3️⃣'].includes(reaction.emoji.name),
+    );
+    responseCollector.on('collect', async (reaction) => {
+      let roleIndex;
+      const eventReactionList = eventMessage.reactions.resolve(reaction);
+
+      // Update role field
+      const usersWithRole = await eventReactionList.users.fetch();
+      const usersWithRoleNameList = usersWithRole
+        .mapValues((user) => user.username)
+        .array()
+        .join(', ');
+
+      // Replace previous field with a new field
+      const previousRoleField = eventEmbed.fields[roleIndex];
+      eventEmbed.spliceFields(roleIndex, 1, {
+        name: previousRoleField.name,
+        value: usersWithRoleNameList,
+      });
+
+      // Replace embed with new content
+      await eventMessage.edit(eventEmbed);
+    });
   }
 });
-
-client.login(config.BOT_TOKEN);
