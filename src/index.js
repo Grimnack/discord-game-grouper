@@ -70,6 +70,26 @@ client.on('message', async function (message) {
     );
     responseCollector.on('collect', async (reaction) => {
       let roleIndex;
+      switch (reaction.emoji.name) {
+        case '1️⃣': {
+          roleIndex = 0;
+          break;
+        }
+        case '2️⃣': {
+          roleIndex = 1;
+          break;
+        }
+        case '3️⃣': {
+          roleIndex = 2;
+          break;
+        }
+
+        default: {
+          console.error(
+            `Unrecognised non-filtered reaction used: '${reaction}'`,
+          );
+        }
+      }
       const eventReactionList = eventMessage.reactions.resolve(reaction);
 
       // Update role field
