@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const config = require('./config.json');
+const config = require('../config.json');
 const client = new Discord.Client();
 
 client.login(config.BOT_TOKEN);
@@ -30,24 +30,24 @@ client.on('message', async function (message) {
 
   if (command === 'help') {
     message.reply(
-      'Voici les fonctions que tu peux lancer :\n - !help\n - !event'
+      'Voici les fonctions que tu peux lancer :\n - !help\n - !event',
     );
   } else if (command === 'event') {
     const filter = (collected) => collected.author.id === message.author.id;
     const title = await askQuestion(
       message,
       'Dis moi le titre de ton event',
-      filter
+      filter,
     );
     const date = await askQuestion(
       message,
       'Dis moi la date de ton event (yyyy-MM-dd)',
-      filter
+      filter,
     );
     const rolesStr = await askQuestion(
       message,
       'Donne moi les roles que tu souhaites demander (role1/role2/role3)',
-      filter
+      filter,
     );
     const roles = rolesStr.split('/');
     const eventEmbed = new Discord.MessageEmbed()
