@@ -5,7 +5,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon src/index.js"
+    "start": "dotenv -- nodemon src/index.js"
   },
   "author": "Matthieu Caron",
   "license": "ISC",
@@ -13,6 +13,7 @@
     "discord.js": "^12.4.0"
   },
   "devDependencies": {
+    "dotenv-cli": "^4.0.0",
     "eslint": "^7.19.0",
     "nodemon": "^2.0.6",
     "prettier": "2.2.1"
